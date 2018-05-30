@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
  
 class Login extends Component {
   responseGoogle = (response) => {
-    const url = 'http://localhost:1337/gconnect';
+    const url = 'http://localhost:1337/gconnect/';
     fetch(url, {
       method: 'POST',
       headers: {
