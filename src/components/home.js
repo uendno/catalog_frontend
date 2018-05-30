@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import Item from "./item"
+import React, { Component } from 'react';
+import Item from './item';
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      latest_items: []
+      latest_items: [],
     };
 
-    const url = 'http://localhost:1337/latest_items/6/'
+    const url = 'http://localhost:1337/latest_items/6/';
 
     fetch(url, {
-      method: 'GET'
+      method: 'GET',
     }).then(response => response.json())
-      .then(response => {
-        console.log(response);
+      .then((response) => {
         this.setState({
-          latest_items: 
-          response.data.map(({data}) =>
-          <Item 
-            key={'item' + data.id.toString()}  
-            item={data}/>)
+          latest_items:
+          response.data.map(({ data }) =>
+            (<Item
+              key={`item${data.id}`}
+              item={data}
+            />)),
         });
       });
   }
@@ -30,13 +30,11 @@ class Home extends Component {
     return (
       <div>
         <h1>Latest Items</h1>
-        <br></br>
+        <br />
         {this.state.latest_items}
-        <div>
-        </div>
       </div>
     );
   }
 }
 
-export default Home
+export default Home;

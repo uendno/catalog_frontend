@@ -1,15 +1,13 @@
-import React, { Component } from "react";
-import Category from './category';
-import {
-  NavLink,
-} from "react-router-dom";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import CategoryLink from './category_link';
 
 class Categories extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
-      categories: []
+    this.state = {
+      categories: [],
     };
 
     const url = 'http://localhost:1337/categories/';
@@ -17,14 +15,15 @@ class Categories extends Component {
     fetch(url, {
       method: 'GET',
     }).then(response => response.json())
-      .then(response => {
+      .then((response) => {
         this.setState({
           categories: response.data.map(category =>
-          <Category
-            category={category}
-            key={'category' + category.data.id.toString()}
-            />)
-        })
+            (
+              <CategoryLink
+                category={category}
+                key={`category${category.data.id}`}
+              />)),
+        });
       });
   }
 
@@ -34,7 +33,7 @@ class Categories extends Component {
         <div className="row">
           <div className="col-md-12">
             <NavLink to="/new_category">New Category</NavLink>
-            <hr></hr>
+            <hr />
           </div>
         </div>
         {this.state.categories}
@@ -43,4 +42,4 @@ class Categories extends Component {
   }
 }
 
-export default Categories
+export default Categories;

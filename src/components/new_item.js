@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class NewItem extends Component {
   render() {
@@ -10,4 +10,4 @@ class NewItem extends Component {
   }
 }
 
-export default NewItem
+export default NewItem;
