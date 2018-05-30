@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Route, NavLink, HashRouter } from 'react-router-dom';
-import Home from './home';
-import NewCategory from './new_category';
-import NewItem from './new_item';
-import Login from './login';
+import { NavLink, HashRouter } from 'react-router-dom';
 import Header from './header';
 import Categories from './categories';
-import Category from './category';
+import Content from './content';
 
 
 class Main extends Component {
@@ -33,35 +29,17 @@ class Main extends Component {
           />
           <br />
           <div className="row">
-            <Categories />
+            <div className="col-md-3">
+              <Categories />
+            </div>
             <div className="col-md-9">
               <NavLink to="/new_item">New Item</NavLink>
               <hr />
-              <div className="content">
-                <Route exact path="/" component={Home} />
-                <Route path="/new_category" component={NewCategory} />
-                <Route path="/new_item" component={NewItem} />
-                <Route
-                  path="/login"
-                  render={props => (
-                    <Login
-                      setLoggedInTrue={() => {
-                        this.setState({ loggedIn: true });
-                      }}
-                      {...props}
-                    />)
-                  }
-                />
-                <Route
-                  path="/category/:categoryId/"
-                  render={props => (
-                    <Category
-                      key={props.match.params.categoryId}
-                      {...props}
-                    />
-                  )}
-                />
-              </div>
+              <Content
+                setLoggedInTrue={() => {
+                  this.setState({ loggedIn: true });
+                }}
+              />
             </div>
           </div>
         </div>

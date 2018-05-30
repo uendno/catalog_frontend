@@ -29,7 +29,7 @@ class Categories extends Component {
 
   render() {
     return (
-      <div className="col-md-3">
+      <div>
         <div className="row">
           <div className="col-md-12">
             <NavLink to="/new_category">New Category</NavLink>
