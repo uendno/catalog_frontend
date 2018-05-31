@@ -15,7 +15,13 @@ const Item = ({ item }) => (
     <p style={itemNameStyle}>{item.data.name}</p>
     <p style={noBottomMarginStyle}>Description: {item.data.description}</p>
     <p style={noBottomMarginStyle}>Price: {item.data.price}</p>
-    <p style={noBottomMarginStyle}>{console.log(item)}{item.owns}</p>
+    {item.owns &&
+      (
+      <p style={noBottomMarginStyle}>{console.log(item)}
+        edit delete
+      </p>
+      )
+    }
     <br />
   </React.Fragment>
 );

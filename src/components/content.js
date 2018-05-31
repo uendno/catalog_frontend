@@ -12,12 +12,15 @@ const Content = props => (
   <div className="content">
     <Route exact path="/" component={Home} />
     <Route path="/new_category" component={NewCategory} />
-    <Route path="/new_item" component={NewItem} />
+    <Route
+      path="/new_item"
+      component={NewItem}
+    />
     <Route
       path="/login"
       render={innerProps => (
         <Login
-          setLoggedInTrue={props.setLoggedInTrue}
+          setLoggedIn={props.setLoggedIn}
           {...innerProps}
         />)
       }
@@ -36,7 +39,7 @@ const Content = props => (
 );
 
 Content.propTypes = {
-  setLoggedInTrue: PropTypes.func.isRequired,
+  setLoggedIn: PropTypes.func.isRequired,
 };
 
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { NavLink, HashRouter } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import Header from './header';
 import Categories from './categories';
 import Content from './content';
@@ -8,7 +7,7 @@ import Content from './content';
 
 class Main extends Component {
   state = {
-    loggedIn: Boolean((new Cookies()).get('token')),
+    loggedIn: localStorage.getItem('email'),
   };
 
   render() {
@@ -17,9 +16,9 @@ class Main extends Component {
         <div className="container">
           <Header
             loggedIn={this.state.loggedIn}
-            setLoggedInFalse={() => {
+            setLoggedInNull={() => {
               this.setState({
-                loggedIn: false,
+                loggedIn: null,
               });
             }}
           />
@@ -32,8 +31,8 @@ class Main extends Component {
               <NavLink to="/new_item">New Item</NavLink>
               <hr />
               <Content
-                setLoggedInTrue={() => {
-                  this.setState({ loggedIn: true });
+                setLoggedIn={(email) => {
+                  this.setState({ loggedIn: email });
                 }}
               />
             </div>

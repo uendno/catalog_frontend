@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GoogleLogin from 'react-google-login';
-import Cookies from 'universal-cookie';
 import callCatalogApi from '../utility';
 
 
@@ -12,9 +11,9 @@ class Login extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ access_token: response.accessToken }),
     }).then((response) => {
-      this.props.setLoggedInTrue();
-      const cookies = new Cookies();
-      cookies.set('token', response, { path: '/' });
+      this.props.setLoggedIn(response.email);
+      localStorage.setItem('email', response.email);
+      localStorage.setItem('Authorization', response.Authorization);
       this.props.history.push("/");
     });
   };
@@ -36,7 +35,7 @@ class Login extends Component {
 
 
 Login.propTypes = {
-  setLoggedInTrue: PropTypes.func.isRequired,
+  setLoggedIn: PropTypes.func.isRequired,
 };
 
 export default Login;

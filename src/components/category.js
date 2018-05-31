@@ -12,11 +12,13 @@ class Category extends Component {
   componentDidMount() {
     // eslint-disable-next-line prefer-destructuring
     const categoryId = this.props.match.params.categoryId;
+
     callCatalogApi(`category/${categoryId}/related/`, {
       method: 'GET',
     }).then((response) => {
       this.setState({
         category: response.data,
+        ownsCategory: response.owns,
         items: response.children,
       });
     });
@@ -27,6 +29,7 @@ class Category extends Component {
       return (
         <React.Fragment>
           <h1>{this.state.category.name}</h1>
+          {this.state.ownsCategory && <p>edit delete</p>}
           <br />
           {this.state.items.map(item => (
             <Item

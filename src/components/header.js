@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import Cookies from 'universal-cookie';
-
-const clearCookies = () => {
-  const cookies = new Cookies();
-  cookies.remove('token');
-};
 
 const headerStyle = {
   margin: '.8em',
@@ -27,19 +21,21 @@ const Header = props => (
         {
           props.loggedIn
         ?
-          // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          <a
-            href=""
-            onClick={
-              (event) => {
-                props.setLoggedInFalse();
-                clearCookies();
-                event.preventDefault();
+          <p>
+            {props.loggedIn} &nbsp; &nbsp;
+            <a
+              href=""
+              onClick={
+                (event) => {
+                  props.setLoggedInNull();
+                  localStorage.clear();
+                  event.preventDefault();
+                }
               }
-            }
-          >
-              logout
-          </a>
+            >
+              Logout
+            </a>
+          </p>
         :
           <NavLink to="/login">
             Login
@@ -51,8 +47,8 @@ const Header = props => (
 );
 
 Header.propTypes = {
-  setLoggedInFalse: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
+  setLoggedInNull: PropTypes.func.isRequired,
+  loggedIn: PropTypes.string.isRequired,
 };
 
 export default Header;
