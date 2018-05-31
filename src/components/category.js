@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Item from './item';
+import callCatalogApi from '../utility';
 
 class Category extends Component {
   constructor(props) {
@@ -13,17 +14,15 @@ class Category extends Component {
 
     // eslint-disable-next-line prefer-destructuring
     const categoryId = props.match.params.categoryId;
-    const url = `http://localhost:1337/category/${categoryId}/related/`;
 
-    fetch(url, {
+    callCatalogApi(`category/${categoryId}/related/`, {
       method: 'GET',
-    }).then(response => response.json())
-      .then((response) => {
-        this.setState({
-          category: response.data,
-          items: response.children,
-        });
-      });
+    }).then((response) =>
+      this.setState({
+        category: response.data,
+        items: response.children,
+      })
+    );
   }
 
   render() {

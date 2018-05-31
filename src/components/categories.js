@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import CategoryLink from './category_link';
+import callCatalogApi from '../utility';
 
 class Categories extends Component {
   constructor(props) {
@@ -10,21 +11,13 @@ class Categories extends Component {
       categories: [],
     };
 
-    const url = 'http://localhost:1337/categories/';
-
-    fetch(url, {
-      method: 'GET',
-    }).then(response => response.json())
-      .then((response) => {
-        this.setState({
-          categories: response.data.map(category =>
-            (
-              <CategoryLink
-                category={category}
-                key={`category${category.data.id}`}
-              />)),
-        });
+    callCatalogApi('categories/', {
+      method: 'GET'
+    }).then((response) => {
+      this.setState({
+        categories: response.data
       });
+    });
   }
 
   render() {
@@ -36,7 +29,12 @@ class Categories extends Component {
             <hr />
           </div>
         </div>
-        {this.state.categories}
+        {this.state.categories.map(category => (
+          <CategoryLink
+            category={category}
+            key={`category${category.data.id}`}
+          />
+        ))}
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Item from './item';
+import callCatalogApi from '../utility'
 
 class Home extends Component {
   constructor(props) {
@@ -9,21 +10,13 @@ class Home extends Component {
       latest_items: [],
     };
 
-    const url = 'http://localhost:1337/latest_items/6/';
-
-    fetch(url, {
+    callCatalogApi('latest_items/6/', {
       method: 'GET',
-    }).then(response => response.json())
-      .then((response) => {
-        this.setState({
-          latest_items:
-          response.data.map(({ data }) =>
-            (<Item
-              key={`item${data.id}`}
-              item={data}
-            />)),
-        });
+    }).then((response) => {
+      this.setState({
+        latest_items: response.data
       });
+    });
   }
 
   render() {
@@ -31,7 +24,12 @@ class Home extends Component {
       <div>
         <h1>Latest Items</h1>
         <br />
-        {this.state.latest_items}
+        {this.state.latest_items.map(({ data }) => (
+          <Item
+            key={`home_item${data.id}`}
+            item={data}
+          />))
+        }
       </div>
     );
   }
