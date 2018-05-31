@@ -15,6 +15,7 @@ class Login extends Component {
       this.props.setLoggedInTrue();
       const cookies = new Cookies();
       cookies.set('token', response, { path: '/' });
+      this.props.history.push("/");
     });
   };
 

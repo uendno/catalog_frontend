@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, HashRouter } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import Header from './header';
 import Categories from './categories';
 import Content from './content';
@@ -7,9 +8,8 @@ import Content from './content';
 
 class Main extends Component {
   state = {
-    loggedIn: false,
+    loggedIn: Boolean((new Cookies()).get('token')),
   };
-
 
   render() {
     return (

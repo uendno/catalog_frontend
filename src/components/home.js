@@ -22,10 +22,10 @@ class Home extends Component {
       <div>
         <h1>Latest Items</h1>
         <br />
-        {this.state.latest_items.map(({ data }) => (
+        {this.state.latest_items.map((item) => (
           <Item
-            key={`home_item${data.id}`}
-            item={data}
+            key={`home_item${item.data.id}`}
+            item={item}
           />))
         }
       </div>

@@ -12,19 +12,22 @@ const noBottomMarginStyle = {
 
 const Item = ({ item }) => (
   <React.Fragment>
-    <p style={itemNameStyle}>{item.name}</p>
-    <p style={noBottomMarginStyle}>Description: {item.description}</p>
-    <p style={noBottomMarginStyle}>Price: {item.price}</p>
+    <p style={itemNameStyle}>{item.data.name}</p>
+    <p style={noBottomMarginStyle}>Description: {item.data.description}</p>
+    <p style={noBottomMarginStyle}>Price: {item.data.price}</p>
+    <p style={noBottomMarginStyle}>{console.log(item)}{item.owns}</p>
     <br />
   </React.Fragment>
 );
 
 Item.propTypes = {
   item: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    data: PropTypes.shape({
+      description: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+    }),
+    owns: PropTypes.bool.isRequired,
   }).isRequired,
 };
-
 
 export default Item;

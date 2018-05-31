@@ -30,7 +30,7 @@ class Category extends Component {
           <br />
           {this.state.items.map(item => (
             <Item
-              item={item.data}
+              item={item}
               key={`item${item.data.id}`}
             />))}
         </React.Fragment>
