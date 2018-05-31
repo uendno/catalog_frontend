@@ -10,9 +10,9 @@ class Home extends Component {
   componentDidMount() {
     callCatalogApi('latest_items/6/', {
       method: 'GET',
-    }).then((response) => {
+    }).then(({ data }) => {
       this.setState({
-        latest_items: response.data,
+        latest_items: data.data,
       });
     });
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const itemNameStyle = {
@@ -10,6 +11,14 @@ const noBottomMarginStyle = {
   marginBottom: 0,
 };
 
+// const createDelete = item => (() =>
+//   item.data.id
+
+// );
+        // <a href="" onClick=>
+        //  delete
+       // </a>
+
 const Item = ({ item }) => (
   <React.Fragment>
     <p style={itemNameStyle}>{item.data.name}</p>
@@ -17,8 +26,10 @@ const Item = ({ item }) => (
     <p style={noBottomMarginStyle}>Price: {item.data.price}</p>
     {item.owns &&
       (
-      <p style={noBottomMarginStyle}>{console.log(item)}
-        edit delete
+      <p style={noBottomMarginStyle}>
+        <NavLink to={`/category/${item.data.category}/item/${item.data.id}/edit`}>
+          edit
+        </NavLink>
       </p>
       )
     }

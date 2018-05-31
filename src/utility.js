@@ -9,7 +9,10 @@ const callCatalogApi = (endpoint, init) => {
     init.headers.Authorization = authorization;
   }
   return fetch(`${prefix}${endpoint}`, init)
-    .then(response => response.json());
+    .then(response => response.json().then(data => ({
+      status: response.status,
+      data: data
+    })))
 };
 
 export default callCatalogApi;

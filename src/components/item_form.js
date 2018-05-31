@@ -9,7 +9,12 @@ class ItemForm extends Component {
     nameError: "",
     descriptionError: "",
     priceError: "",
+    category: this.props.current_category,
   };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps);
+  }
 
   handleInputChange = (event) => {
     this.setState({
@@ -18,43 +23,49 @@ class ItemForm extends Component {
   };
 
   handleSubmit = (event) => {
-    console.log("hel")
     event.preventDefault();
-    this.setState({
+
+    // Validate input
+    const category_name =
+      this.state.category ?
+      this.state.category :
+      this.props.categories[0].data.name;
+
+    const data = {
       name: this.state.name.trim(),
       description: this.state.description.trim(),
       price: this.state.price.trim(),
-    });
+      category_name: category_name,
+    }
 
-    this.setState({nameError:
-      this.state.name ? "" : "Name cannot be empty"
-    });
-    this.setState({descriptionError:
-      this.state.description ? "" : "Description cannot be empty"
-    });
-    this.setState({priceError:
-      this.state.price ? "" : "Price cannot be empty"
-    });
-    if (this.state.name && this.state.description && this.state.price) {
-      callCatalogApi(
-        this.props.endpoint, {
+    if (data.name && data.description && data.price) {
+      callCatalogApi(this.props.endpoint, {
           method: this.props.method,
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            data: {
-              name: this.state.name,
-              description: this.state.description,
-              price: this.state.price,
-            },
+            data: data,
           }),
-        }
+      },
+        this.props.history.push
       ).then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-          this.props.history.push("/");
+        if (response.status === 403) {
+          this.props.history.push("/login");
+          localStorage.clear();
+          return;
         }
+        this.props.history.push("/");
       });
     }
+    const newState = {
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      nameError: data.name ? "" : "Name cannot be empty",
+      descriptionError: data.description ? "" : "Description cannot be empty",
+      priceError: data.price ? "" : "Price cannot be empty" ,
+      category: category_name,
+    }
+    this.setState(newState);
   }
 
   render() {
@@ -108,12 +119,21 @@ class ItemForm extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="item-category">Category</label>
-            <select className="form-control" id="item-category">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <select
+              className="form-control"
+              id="item-category"
+              value={this.state.category}
+              name="category"
+              onChange={this.handleInputChange}
+            >
+              {this.props.categories.map(({ data }) => (
+                <option
+                  key={`form${data.name}`}
+                  value={data.name}
+                >
+                  {data.name}
+              </option>
+              ))}
             </select>
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>

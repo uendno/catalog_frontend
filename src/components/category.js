@@ -15,11 +15,11 @@ class Category extends Component {
 
     callCatalogApi(`category/${categoryId}/related/`, {
       method: 'GET',
-    }).then((response) => {
+    }).then(({ data }) => {
       this.setState({
-        category: response.data,
-        ownsCategory: response.owns,
-        items: response.children,
+        category: data.data,
+        ownsCategory: data.owns,
+        items: data.children,
       });
     });
   }

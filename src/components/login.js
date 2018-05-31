@@ -10,10 +10,10 @@ class Login extends Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ access_token: response.accessToken }),
-    }).then((response) => {
-      this.props.setLoggedIn(response.email);
-      localStorage.setItem('email', response.email);
-      localStorage.setItem('Authorization', response.Authorization);
+    }).then(({ data }) => {
+      this.props.setLoggedIn(data.email);
+      localStorage.setItem('email', data.email);
+      localStorage.setItem('Authorization', data.Authorization);
       this.props.history.push("/");
     });
   };
@@ -28,6 +28,9 @@ class Login extends Component {
           buttonText="Login"
           onSuccess={this.responseGoogle}
         />
+        <br />
+        <br />
+        <p>Login to create, edit or delete items and categories.</p>
       </React.Fragment>
     );
   }
