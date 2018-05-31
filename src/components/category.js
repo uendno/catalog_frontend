@@ -17,12 +17,12 @@ class Category extends Component {
 
     callCatalogApi(`category/${categoryId}/related/`, {
       method: 'GET',
-    }).then((response) =>
+    }).then((response) => {
       this.setState({
         category: response.data,
         items: response.children,
-      })
-    );
+      });
+    });
   }
 
   render() {

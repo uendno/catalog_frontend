@@ -1,3 +1,3 @@
-const prefix = 'http://localhost:1337/'
+const prefix = 'http://localhost:1337/';
 
-export default prefix
+export default prefix;

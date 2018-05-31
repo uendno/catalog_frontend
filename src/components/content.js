@@ -15,9 +15,10 @@ const Content = props => (
     <Route path="/new_item" component={NewItem} />
     <Route
       path="/login"
-      render={inner_props => (
+      render={innerProps => (
         <Login
           setLoggedInTrue={props.setLoggedInTrue}
+          {...innerProps}
         />)
       }
     />
@@ -25,6 +26,7 @@ const Content = props => (
       path="/category/:categoryId/"
       render={props => (
         <Category
+          // eslint-disable-next-line react/prop-types
           key={props.match.params.categoryId}
           {...props}
         />

@@ -1,4 +1,5 @@
-import prefix from './config'
+import prefix from './config';
+
 const callCatalogApi = (endpoint, init) => (
   fetch(`${prefix}${endpoint}`, init)
     .then(response => response.json())

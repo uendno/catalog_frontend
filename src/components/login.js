@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GoogleLogin from 'react-google-login';
 import Cookies from 'universal-cookie';
-import callCatalogApi from '../utility'
+import callCatalogApi from '../utility';
 
 
 class Login extends Component {
@@ -12,13 +12,13 @@ class Login extends Component {
     this.responseGoogle = (response) => {
       callCatalogApi('gconnect/', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({access_token: response.accessToken}),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_token: response.accessToken }),
       }).then((response) => {
-           this.props.setLoggedInTrue();
-           const cookies = new Cookies();
-           cookies.set('token', response, { path: '/' });
-      })
+        this.props.setLoggedInTrue();
+        const cookies = new Cookies();
+        cookies.set('token', response, { path: '/' });
+      });
     };
   }
 

@@ -12,10 +12,10 @@ class Categories extends Component {
     };
 
     callCatalogApi('categories/', {
-      method: 'GET'
+      method: 'GET',
     }).then((response) => {
       this.setState({
-        categories: response.data
+        categories: response.data,
       });
     });
   }

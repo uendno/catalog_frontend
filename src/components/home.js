@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Item from './item';
-import callCatalogApi from '../utility'
+import callCatalogApi from '../utility';
 
 class Home extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Home extends Component {
       method: 'GET',
     }).then((response) => {
       this.setState({
-        latest_items: response.data
+        latest_items: response.data,
       });
     });
   }
