@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import CategoryForm from './category_form.js';
 
-class NewCategory extends Component {
-  render() {
-    return (
-      <div>
-        <h2>New Category</h2>
-      </div>
-    );
-  }
-}
+const NewCategory = props => (
+  <div>
+    <h2>New Category</h2>
+    <CategoryForm
+      name=""
+      endpoint="category/new/"
+      method="PUT"
+      {...props}
+    />
+  </div>
+);
 
 export default NewCategory;
