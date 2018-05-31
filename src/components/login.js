@@ -6,33 +6,29 @@ import callCatalogApi from '../utility';
 
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-
-    this.responseGoogle = (response) => {
-      callCatalogApi('gconnect/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ access_token: response.accessToken }),
-      }).then((response) => {
-        this.props.setLoggedInTrue();
-        const cookies = new Cookies();
-        cookies.set('token', response, { path: '/' });
-      });
-    };
-  }
+  responseGoogle = (response) => {
+    callCatalogApi('gconnect/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ access_token: response.accessToken }),
+    }).then((response) => {
+      this.props.setLoggedInTrue();
+      const cookies = new Cookies();
+      cookies.set('token', response, { path: '/' });
+    });
+  };
 
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <h2>Google Login</h2>
         <GoogleLogin
           clientId="409205980523-pgp1b0o0hascj3n9v9h35bfn8q2ed7ba.apps.googleusercontent.com"
           buttonText="Login"
           onSuccess={this.responseGoogle}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

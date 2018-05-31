@@ -4,13 +4,11 @@ import CategoryLink from './category_link';
 import callCatalogApi from '../utility';
 
 class Categories extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    categories: [],
+  };
 
-    this.state = {
-      categories: [],
-    };
-
+  componentDidMount() {
     callCatalogApi('categories/', {
       method: 'GET',
     }).then((response) => {
@@ -22,7 +20,7 @@ class Categories extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <div className="row">
           <div className="col-md-12">
             <NavLink to="/new_category">New Category</NavLink>
@@ -35,7 +33,7 @@ class Categories extends Component {
             key={`category${category.data.id}`}
           />
         ))}
-      </div>
+      </React.Fragment>
     );
   }
 }

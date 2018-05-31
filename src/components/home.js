@@ -3,13 +3,11 @@ import Item from './item';
 import callCatalogApi from '../utility';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    latest_items: [],
+  };
 
-    this.state = {
-      latest_items: [],
-    };
-
+  componentDidMount() {
     callCatalogApi('latest_items/6/', {
       method: 'GET',
     }).then((response) => {

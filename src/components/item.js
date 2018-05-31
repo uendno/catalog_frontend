@@ -11,12 +11,12 @@ const noBottomMarginStyle = {
 };
 
 const Item = ({ item }) => (
-  <div>
+  <React.Fragment>
     <p style={itemNameStyle}>{item.name}</p>
     <p style={noBottomMarginStyle}>Description: {item.description}</p>
     <p style={noBottomMarginStyle}>Price: {item.price}</p>
     <br />
-  </div>
+  </React.Fragment>
 );
 
 Item.propTypes = {

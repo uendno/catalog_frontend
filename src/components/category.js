@@ -4,17 +4,14 @@ import Item from './item';
 import callCatalogApi from '../utility';
 
 class Category extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    items: [],
+    category: null,
+  };
 
-    this.state = {
-      items: [],
-      category: null,
-    };
-
+  componentDidMount() {
     // eslint-disable-next-line prefer-destructuring
-    const categoryId = props.match.params.categoryId;
-
+    const categoryId = this.props.match.params.categoryId;
     callCatalogApi(`category/${categoryId}/related/`, {
       method: 'GET',
     }).then((response) => {
@@ -28,7 +25,7 @@ class Category extends Component {
   render() {
     if (this.state.category) {
       return (
-        <div>
+        <React.Fragment>
           <h1>{this.state.category.name}</h1>
           <br />
           {this.state.items.map(item => (
@@ -36,7 +33,7 @@ class Category extends Component {
               item={item.data}
               key={`item${item.data.id}`}
             />))}
-        </div>
+        </React.Fragment>
       );
     }
     return <div />;

@@ -6,13 +6,9 @@ import Content from './content';
 
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loggedIn: false,
-    };
-  }
+  state = {
+    loggedIn: false,
+  };
 
 
   render() {

@@ -13,7 +13,7 @@ const headerStyle = {
 };
 
 const Header = props => (
-  <div>
+  <React.Fragment>
     <div className="row">
       <div className="col-md-12 text-center">
         <h1 style={headerStyle}>Catalog</h1>
@@ -47,7 +47,7 @@ const Header = props => (
         }
       </div>
     </div>
-  </div>
+  </React.Fragment>
 );
 
 Header.propTypes = {
