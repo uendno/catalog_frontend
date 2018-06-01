@@ -19,7 +19,9 @@ const Item = ({ item }) => (
     {item.owns &&
       (
       <p style={noBottomMarginStyle}>
-        <NavLink to={`/category/${item.data.category}/item/${item.data.id}/edit`}>
+        <NavLink
+          to={`/category/${item.data.category}/item/${item.data.id}/edit`}
+        >
           edit
         </NavLink>
         &nbsp;
@@ -31,7 +33,7 @@ const Item = ({ item }) => (
             createDelete(
               `category/${item.data.category}/item/${item.data.id}/`,
               () => window.location.reload(),
-              () => {this.props.history.push('login/');}
+              () => { this.props.history.push('login/'); },
             )
           }
         >

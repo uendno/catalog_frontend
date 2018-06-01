@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Item from './item';
-import { callCatalogApi, createDelete }from '../utility';
+import { callCatalogApi, createDelete } from '../utility';
 
 
 class Category extends Component {
@@ -48,7 +48,7 @@ class Category extends Component {
                       this.props.history.push('/');
                       window.location.reload();
                     },
-                    () => {this.props.history.push('login/');}
+                    () => { this.props.history.push('login/'); },
                   )
                 }
               >

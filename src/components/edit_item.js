@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ItemForm from './item_form';
-import { callCatalogApi }from '../utility';
+import { callCatalogApi } from '../utility';
 
 class EditItem extends Component {
   state = {

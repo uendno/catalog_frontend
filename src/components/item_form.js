@@ -14,18 +14,17 @@ class ItemForm extends Component {
 
   componentDidMount() {
     if (this.props.categoryId) {
-      const categoryEndpoint = `category/${this.props.categoryId}/`
+      const categoryEndpoint = `category/${this.props.categoryId}/`;
       callCatalogApi(
         categoryEndpoint,
         {
           method: 'GET',
-        }).then(({ jsonResponse }) => {
-          console.log(jsonResponse);
-          this.setState({
-            category: jsonResponse.data.name
-          })
-        }
-      )
+        },
+      ).then(({ jsonResponse }) => {
+        this.setState({
+          category: jsonResponse.data.name,
+        });
+      });
     }
   }
 
