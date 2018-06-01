@@ -43,7 +43,7 @@ class Category extends Component {
                 href=""
                 onClick={
                   createDelete(
-                    `category/${this.state.category}/`,
+                    `category/${this.state.category.id}/`,
                     () => {
                       this.props.history.push('/');
                       window.location.reload();
