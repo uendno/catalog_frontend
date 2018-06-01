@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryForm from './category_form.js';
+import CategoryForm from './category_form';
 
 const NewCategory = props => (
   <div>

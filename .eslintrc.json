@@ -6,7 +6,12 @@
     },
     "rules": {
         "react/jsx-filename-extension": [1, {"extensions": [".js"]}],
-        "no-shadow": "off"
+        "no-shadow": "off",
+        "react/prop-types": "off",
+        "jsx-a11y/label-has-for": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "react/jsx-max-props-per-line": "off"
+
     },
     "parser": "babel-eslint"
 }

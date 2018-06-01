@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Item from './item';
 import callCatalogApi from '../utility';
 
-const createDelete = (category, refresh) => ((event) =>{
+const createDelete = (category, refresh) => ((event) => {
   callCatalogApi(`category/${category.id}/`, {
     method: 'DELETE',
-  })
+  });
   event.preventDefault();
   refresh();
-})
+});
 
 class Category extends Component {
   state = {
@@ -47,9 +46,15 @@ class Category extends Component {
               &nbsp;
               &nbsp;
               &nbsp;
-              <a href="" onClick={
-                createDelete(this.state.category, () => {
-                  this.props.history.push('/'); window.location.reload();})}>
+              <a
+                href=""
+                onClick={
+                  createDelete(this.state.category, () => {
+                    this.props.history.push('/');
+                    window.location.reload();
+                  })
+                }
+              >
                 delete
               </a>
             </p>
@@ -68,14 +73,5 @@ class Category extends Component {
     return <div />;
   }
 }
-
-Category.propTypes = {
-  match: PropTypes.shape({
-    params:
-      PropTypes.shape({
-        categoryId: PropTypes.string.isRequired,
-      }).isRequired,
-  }).isRequired,
-};
 
 export default Category;

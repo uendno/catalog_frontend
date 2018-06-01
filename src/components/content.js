@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import Home from './home';
 import NewCategory from './new_category';
-import EditCategory from './edit_category.js';
+import EditCategory from './edit_category';
 import NewItem from './new_item';
 import EditItem from './edit_item';
 import Login from './login';
@@ -16,12 +15,12 @@ const Content = props => (
     <Route exact path="/new_category" component={NewCategory} />
     <Route
       exact path="/category/:categoryId/edit"
-      render={innerProps =>
-      <EditCategory
-        key={`${innerProps.match.params.categoryId}/edit`}
-        {...innerProps}
-      />
-      }
+      render={innerProps => (
+        <EditCategory
+          key={`${innerProps.match.params.categoryId}/edit`}
+          {...innerProps}
+        />
+      )}
     />
     <Route
       exact path="/new_item"
@@ -56,7 +55,6 @@ const Content = props => (
       exact path="/category/:categoryId/"
       render={innerProps => (
         <Category
-          // eslint-disable-next-line react/prop-types
           key={innerProps.match.params.categoryId}
           {...innerProps}
         />
@@ -64,10 +62,5 @@ const Content = props => (
     />
   </div>
 );
-
-Content.propTypes = {
-  setLoggedIn: PropTypes.func.isRequired,
-};
-
 
 export default Content;

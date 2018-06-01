@@ -1,17 +1,14 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import CategoryForm from './category_form';
 import callCatalogApi from '../utility';
 
 class EditCategory extends Component {
-  categoryId = this.props.match.params.categoryId;
-  category_endpoint = `category/${this.categoryId}/`
-
   state = {
-    name: "",
+    name: '',
   };
 
   componentDidMount = () => {
-    callCatalogApi(this.category_endpoint, {
+    callCatalogApi(this.categoryEndpoint, {
       method: 'GET',
     }).then(({ data }) => {
       this.setState({
@@ -20,13 +17,16 @@ class EditCategory extends Component {
     });
   }
 
+  categoryId = this.props.match.params.categoryId;
+  categoryEndpoint = `category/${this.categoryId}/`
+
   render() {
     return (
       <div>
         <h2>Edit Category</h2>
         <CategoryForm
           name={this.state.name}
-          endpoint={this.category_endpoint}
+          endpoint={this.categoryEndpoint}
           method="PATCH"
           {...this.props}
         />

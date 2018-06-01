@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import callCatalogApi from '../utility';
 
 class CategoryForm extends Component {
   state = {
     name: this.props.name,
-    nameError: "",
+    nameError: '',
   };
 
   componentWillReceiveProps(nextProps) {
@@ -22,31 +22,31 @@ class CategoryForm extends Component {
 
     const data = {
       name: this.state.name.trim(),
-    }
+    };
 
     if (data.name) {
-      callCatalogApi(this.props.endpoint, {
+      callCatalogApi(
+        this.props.endpoint,
+        {
           method: this.props.method,
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            data: data,
-          }),
-      },
-        this.props.history.push
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data }),
+        },
+        this.props.history.push,
       ).then((response) => {
         if (response.status === 403) {
-          this.props.history.push("/login");
+          this.props.history.push('/login');
           localStorage.clear();
           return;
         }
-        this.props.history.push("/");
+        this.props.history.push('/');
         window.location.reload();
       });
     }
     const newState = {
       name: data.name,
-      nameError: data.name ? "" : "Name cannot be empty",
-    }
+      nameError: data.name ? '' : 'Name cannot be empty',
+    };
     this.setState(newState);
   }
 

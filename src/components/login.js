@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import GoogleLogin from 'react-google-login';
 import callCatalogApi from '../utility';
 
@@ -14,7 +13,7 @@ class Login extends Component {
       this.props.setLoggedIn(data.email);
       localStorage.setItem('email', data.email);
       localStorage.setItem('Authorization', data.Authorization);
-      this.props.history.push("/");
+      this.props.history.push('/');
     });
   };
 
@@ -36,9 +35,5 @@ class Login extends Component {
   }
 }
 
-
-Login.propTypes = {
-  setLoggedIn: PropTypes.func.isRequired,
-};
 
 export default Login;

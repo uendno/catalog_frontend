@@ -1,22 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import ItemForm from './item_form';
 import callCatalogApi from '../utility';
 
 class EditItem extends Component {
-  categoryId = this.props.match.params.categoryId;
-  itemId = this.props.match.params.itemId;
-  item_endpoint = `category/${this.categoryId}/item/${this.itemId}/`
-  category_endpoint = `category/${this.categoryId}/`
-
   state = {
-    name: "",
-    description: "",
-    price: "",
-    category_name: ""
+    name: '',
+    description: '',
+    price: '',
+    category_name: '',
   };
 
   componentDidMount = () => {
-    callCatalogApi(this.item_endpoint, {
+    callCatalogApi(this.itemEndpoint, {
       method: 'GET',
     }).then(({ data }) => {
       this.setState({
@@ -26,7 +21,7 @@ class EditItem extends Component {
       });
     });
 
-    callCatalogApi(this.category_endpoint, {
+    callCatalogApi(this.categoryEndpoint, {
       method: 'GET',
     }).then(({ data }) => {
       this.setState({
@@ -34,6 +29,11 @@ class EditItem extends Component {
       });
     });
   }
+
+  categoryId = this.props.match.params.categoryId;
+  itemId = this.props.match.params.itemId;
+  itemEndpoint = `category/${this.categoryId}/item/${this.itemId}/`
+  categoryEndpoint = `category/${this.categoryId}/`
 
   render() {
     return (
@@ -43,7 +43,7 @@ class EditItem extends Component {
           name={this.state.name}
           description={this.state.description}
           price={this.state.price}
-          endpoint={this.item_endpoint}
+          endpoint={this.itemEndpoint}
           method="PATCH"
           categories={this.props.categories}
           current_category={this.state.category_name}

@@ -9,7 +9,7 @@ import callCatalogApi from '../utility';
 class Main extends Component {
   state = {
     loggedIn: localStorage.getItem('email'),
-    categories: []
+    categories: [],
   };
 
   componentDidMount() {
@@ -44,9 +44,9 @@ class Main extends Component {
             </div>
             <div className="col-md-9">
               {this.state.loggedIn ?
-              <NavLink to="/new_item">New Item</NavLink>
+                <NavLink to="/new_item">New Item</NavLink>
                   :
-              <NavLink to="/login">New Item</NavLink>
+                <NavLink to="/login">New Item</NavLink>
                 }
               <hr />
               <Content

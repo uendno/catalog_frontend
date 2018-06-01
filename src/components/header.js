@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 const headerStyle = {
@@ -45,10 +44,5 @@ const Header = props => (
     </div>
   </React.Fragment>
 );
-
-Header.propTypes = {
-  setLoggedInNull: PropTypes.func.isRequired,
-  loggedIn: PropTypes.string.isRequired,
-};
 
 export default Header;

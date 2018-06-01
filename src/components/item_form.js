@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import callCatalogApi from '../utility';
 
 class ItemForm extends Component {
@@ -6,9 +6,9 @@ class ItemForm extends Component {
     name: this.props.name,
     description: this.props.description,
     price: this.props.price,
-    nameError: "",
-    descriptionError: "",
-    priceError: "",
+    nameError: '',
+    descriptionError: '',
+    priceError: '',
     category: this.props.current_category,
   };
 
@@ -26,45 +26,45 @@ class ItemForm extends Component {
     event.preventDefault();
 
     // Validate input
-    const category_name =
-      this.state.category ?
-      this.state.category :
-      this.props.categories[0].data.name;
+    const categoryName =
+        this.state.category ?
+          this.state.category :
+          this.props.categories[0].data.name;
 
     const data = {
       name: this.state.name.trim(),
       description: this.state.description.trim(),
       price: this.state.price.trim(),
-      category_name: category_name,
-    }
+      category_name: categoryName,
+    };
 
     if (data.name && data.description && data.price) {
-      callCatalogApi(this.props.endpoint, {
+      callCatalogApi(
+        this.props.endpoint,
+        {
           method: this.props.method,
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            data: data,
-          }),
-      },
-        this.props.history.push
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data }),
+        },
+        this.props.history.push,
       ).then((response) => {
         if (response.status === 403) {
-          this.props.history.push("/login");
+          this.props.history.push('/login');
           localStorage.clear();
           return;
         }
-        this.props.history.push("/");
+        this.props.history.push('/');
       });
     }
     const newState = {
       name: data.name,
       description: data.description,
       price: data.price,
-      nameError: data.name ? "" : "Name cannot be empty",
-      descriptionError: data.description ? "" : "Description cannot be empty",
-      priceError: data.price ? "" : "Price cannot be empty" ,
-      category: category_name,
-    }
+      nameError: data.name ? '' : 'Name cannot be empty',
+      descriptionError: data.description ? '' : 'Description cannot be empty',
+      priceError: data.price ? '' : 'Price cannot be empty',
+      category: categoryName,
+    };
     this.setState(newState);
   }
 
@@ -88,7 +88,7 @@ class ItemForm extends Component {
             </small>
           </div>
           <div className="form-group">
-            <label htmlFor="item-description"> Description </label>
+            <label htmlFor="item-description">Description</label>
             <textarea
               id="item-description"
               type="text"
@@ -132,7 +132,7 @@ class ItemForm extends Component {
                   value={data.name}
                 >
                   {data.name}
-              </option>
+                </option>
               ))}
             </select>
           </div>
