@@ -3,7 +3,7 @@ import { NavLink, HashRouter } from 'react-router-dom';
 import Header from './header';
 import Categories from './categories';
 import Content from './content';
-import callCatalogApi from '../utility';
+import { callCatalogApi } from '../utility';
 
 
 class Main extends Component {
@@ -15,9 +15,9 @@ class Main extends Component {
   componentDidMount() {
     callCatalogApi('categories/', {
       method: 'GET',
-    }).then(({ data }) => {
+    }).then(({ jsonResponse }) => {
       this.setState({
-        categories: data.data,
+        categories: jsonResponse.data,
       });
     });
   }

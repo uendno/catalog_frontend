@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ItemForm from './item_form';
-import callCatalogApi from '../utility';
+import { callCatalogApi }from '../utility';
 
 class EditItem extends Component {
   state = {
@@ -12,11 +12,11 @@ class EditItem extends Component {
   componentDidMount = () => {
     callCatalogApi(this.itemEndpoint, {
       method: 'GET',
-    }).then(({ data }) => {
+    }).then(({ jsonResponse }) => {
       this.setState({
-        name: data.data.name,
-        description: data.data.description,
-        price: data.data.price,
+        name: jsonResponse.data.name,
+        description: jsonResponse.data.description,
+        price: jsonResponse.data.price,
       });
     });
   }

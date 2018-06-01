@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CategoryForm from './category_form';
-import callCatalogApi from '../utility';
+import { callCatalogApi } from '../utility';
 
 class EditCategory extends Component {
   state = {
@@ -10,9 +10,9 @@ class EditCategory extends Component {
   componentDidMount = () => {
     callCatalogApi(this.categoryEndpoint, {
       method: 'GET',
-    }).then(({ data }) => {
+    }).then(({ jsonResponse }) => {
       this.setState({
-        name: data.data.name,
+        name: jsonResponse.data.name,
       });
     });
   }

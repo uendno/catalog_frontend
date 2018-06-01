@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import callCatalogApi from '../utility';
+import { createDelete } from '../utility';
 
 const itemNameStyle = {
   fontSize: '1.5em',
@@ -10,14 +10,6 @@ const itemNameStyle = {
 const noBottomMarginStyle = {
   marginBottom: 0,
 };
-
-const createDelete = (item, refresh) => ((event) => {
-  callCatalogApi(`category/${item.data.category}/item/${item.data.id}/`, {
-    method: 'DELETE',
-  });
-  event.preventDefault();
-  refresh();
-});
 
 const Item = ({ item }) => (
   <React.Fragment>
@@ -36,7 +28,12 @@ const Item = ({ item }) => (
         <a
           href=""
           onClick={
-            createDelete(item, () => window.location.reload())}
+            createDelete(
+              `category/${item.data.category}/item/${item.data.id}/`,
+              () => window.location.reload(),
+              () => {this.props.history.push('login/');}
+            )
+          }
         >
           delete
         </a>

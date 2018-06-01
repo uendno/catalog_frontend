@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Item from './item';
-import callCatalogApi from '../utility';
+import { callCatalogApi, createDelete }from '../utility';
 
-const createDelete = (category, refresh) => ((event) => {
-  callCatalogApi(`category/${category.id}/`, {
-    method: 'DELETE',
-  });
-  event.preventDefault();
-  refresh();
-});
 
 class Category extends Component {
   state = {
@@ -23,11 +16,11 @@ class Category extends Component {
 
     callCatalogApi(`category/${categoryId}/related/`, {
       method: 'GET',
-    }).then(({ data }) => {
+    }).then(({ jsonResponse }) => {
       this.setState({
-        category: data.data,
-        ownsCategory: data.owns,
-        items: data.children,
+        category: jsonResponse.data,
+        ownsCategory: jsonResponse.owns,
+        items: jsonResponse.children,
       });
     });
   }
@@ -49,10 +42,14 @@ class Category extends Component {
               <a
                 href=""
                 onClick={
-                  createDelete(this.state.category, () => {
-                    this.props.history.push('/');
-                    window.location.reload();
-                  })
+                  createDelete(
+                    `category/${this.state.category}/`,
+                    () => {
+                      this.props.history.push('/');
+                      window.location.reload();
+                    },
+                    () => {this.props.history.push('login/');}
+                  )
                 }
               >
                 delete

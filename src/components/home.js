@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Item from './item';
-import callCatalogApi from '../utility';
+import { callCatalogApi } from '../utility';
 
 class Home extends Component {
   state = {
@@ -10,9 +10,9 @@ class Home extends Component {
   componentDidMount() {
     callCatalogApi('latest_items/6/', {
       method: 'GET',
-    }).then(({ data }) => {
+    }).then(({ jsonResponse }) => {
       this.setState({
-        latest_items: data.data,
+        latest_items: jsonResponse.data,
       });
     });
   }

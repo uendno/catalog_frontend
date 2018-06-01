@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
-import callCatalogApi from '../utility';
+import { callCatalogApi } from '../utility';
 
 
 class Login extends Component {
@@ -9,10 +9,10 @@ class Login extends Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ access_token: response.accessToken }),
-    }).then(({ data }) => {
-      this.props.setLoggedIn(data.email);
-      localStorage.setItem('email', data.email);
-      localStorage.setItem('Authorization', data.Authorization);
+    }).then(({ jsonResponse }) => {
+      this.props.setLoggedIn(jsonResponse.email);
+      localStorage.setItem('email', jsonResponse.email);
+      localStorage.setItem('Authorization', jsonResponse.Authorization);
       this.props.history.push('/');
     });
   };

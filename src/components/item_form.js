@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import callCatalogApi from '../utility';
+import { callCatalogApi } from '../utility';
 
 class ItemForm extends Component {
   state = {
@@ -19,9 +19,10 @@ class ItemForm extends Component {
         categoryEndpoint,
         {
           method: 'GET',
-        }).then(({ data }) => {
+        }).then(({ jsonResponse }) => {
+          console.log(jsonResponse);
           this.setState({
-            category: data.data.name
+            category: jsonResponse.data.name
           })
         }
       )

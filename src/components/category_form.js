@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import callCatalogApi from '../utility';
+import { callCatalogApi } from '../utility';
 
 class CategoryForm extends Component {
   state = {

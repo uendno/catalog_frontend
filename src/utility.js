@@ -13,8 +13,21 @@ const callCatalogApi = (endpoint, init) => {
   return fetch(`${prefix}${endpoint}`, init)
     .then(response => response.json().then(data => ({
       status: response.status,
-      data,
+      jsonResponse: data,
     })));
 };
 
-export default callCatalogApi;
+const createDelete = (endpoint, refresh, redirect) => ((event) => {
+  event.preventDefault();
+  callCatalogApi(endpoint, {
+    method: 'DELETE',
+  }).then((response) => {
+    if (response.status === 200) {
+      refresh();
+    } else if (response.status === 403) {
+      redirect();
+    }
+  });
+});
+
+export { callCatalogApi, createDelete };
