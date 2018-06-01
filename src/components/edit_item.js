@@ -7,7 +7,6 @@ class EditItem extends Component {
     name: '',
     description: '',
     price: '',
-    category_name: '',
   };
 
   componentDidMount = () => {
@@ -20,20 +19,11 @@ class EditItem extends Component {
         price: data.data.price,
       });
     });
-
-    callCatalogApi(this.categoryEndpoint, {
-      method: 'GET',
-    }).then(({ data }) => {
-      this.setState({
-        category_name: data.data.name,
-      });
-    });
   }
 
   categoryId = this.props.match.params.categoryId;
   itemId = this.props.match.params.itemId;
   itemEndpoint = `category/${this.categoryId}/item/${this.itemId}/`
-  categoryEndpoint = `category/${this.categoryId}/`
 
   render() {
     return (
@@ -46,7 +36,7 @@ class EditItem extends Component {
           endpoint={this.itemEndpoint}
           method="PATCH"
           categories={this.props.categories}
-          current_category={this.state.category_name}
+          categoryId={this.categoryId}
           {...this.props}
         />
       </div>

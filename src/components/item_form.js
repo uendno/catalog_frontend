@@ -12,6 +12,22 @@ class ItemForm extends Component {
     category: this.props.current_category,
   };
 
+  componentDidMount() {
+    if (this.props.categoryId) {
+      const categoryEndpoint = `category/${this.props.categoryId}/`
+      callCatalogApi(
+        categoryEndpoint,
+        {
+          method: 'GET',
+        }).then(({ data }) => {
+          this.setState({
+            category: data.data.name
+          })
+        }
+      )
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState(nextProps);
   }
